@@ -27,7 +27,7 @@ type WatchlistSession struct {
 	credential  azcore.TokenCredential
 }
 
-// Used to persist ADX token across requests
+// Used to persist Watchlist TokenCredential across requests
 var _WatchlistSession WatchlistSession
 
 type WatchlistOutputProcessor struct {
@@ -197,11 +197,4 @@ func WatchlistTokenCredential(creds internal.Credentials) azcore.TokenCredential
 	}
 
 	return cred
-	// var ctx = context.Background()
-	// policy := policy.TokenRequestOptions{Scopes: []string{"https://api.loganalytics.io/.default"}}
-	// token, err := cred.GetToken(ctx, policy)
-	// if err != nil {
-	// 	fmt.Println("Error getting token:", err)
-	// }
-	// return token.Token
 }

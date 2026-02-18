@@ -47,7 +47,7 @@ func (m *ADXOutputProcessor) BatchSize() int {
 
 func (m *ADXOutputProcessor) ProduceOutput(QueryResults internal.QueryResults) error {
 	if m.Credentials.AdxAppSecret == "" && (m.Credentials.AdxManagedIdentity == "" || m.Credentials.AdxManagedIdentity == "false") && (m.Credentials.AdxFederatedWorkloadIdentity == "" || m.Credentials.AdxFederatedWorkloadIdentity == "false") {
-		return fmt.Errorf("ADXAppSecret is empty and no Managed Identity/Federated Workload Identity Enabled, skipping..")
+		return fmt.Errorf("ADXAppSecret is empty and no Managed Identity or Federated Workload Identity set, skipping..")
 	}
 
 	if !_ADXSession.initialized {
@@ -74,7 +74,6 @@ func (m *ADXOutputProcessor) ProduceOutput(QueryResults internal.QueryResults) e
 
 	kustoConnectionStringBuilder := kusto.NewConnectionStringBuilder(m.Credentials.AdxClusterURL)
 	kustoConnectionString := kustoConnectionStringBuilder.WithApplicationToken(m.Credentials.AdxAppID, _ADXSession.token)
-	//kustoConnectionString := kustoConnectionStringBuilder.WithAadAppKey(m.Credentials.AdxAppID, m.Credentials.AdxAppSecret, m.Credentials.AdxTenantID)
 
 	client, err := kusto.New(kustoConnectionString)
 	if err != nil {

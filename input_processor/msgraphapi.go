@@ -39,7 +39,7 @@ type MsGraphApiResults struct {
 
 func (m *MsGraphApiProcessor) ExecuteQuery() (internal.QueryResults, error) {
 	if m.Credentials.GraphAppSecret == "" && (m.Credentials.GraphManagedIdentity == "false" || m.Credentials.GraphManagedIdentity == "") && (m.Credentials.GraphFederatedWorkloadIdentity == "false" || m.Credentials.GraphFederatedWorkloadIdentity == "") {
-		return internal.QueryResults{}, fmt.Errorf("GraphAppSecret is empty, skipping..")
+		return internal.QueryResults{}, fmt.Errorf("GraphAppSecret is empty and no Managed Identity or Federated Workload Identity set, skipping..")
 	}
 
 	if !_MSGraphApiSession.initialized {

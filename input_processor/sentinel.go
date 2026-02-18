@@ -38,7 +38,7 @@ type SentinelResults struct {
 
 func (m *SentinelProcessor) ExecuteQuery() (internal.QueryResults, error) {
 	if m.Credentials.SentinelAppSecret == "" && (m.Credentials.SentinelManagedIdentity == "" || m.Credentials.SentinelManagedIdentity == "false") && (m.Credentials.SentinelFederatedWorkloadIdentity == "false" || m.Credentials.SentinelFederatedWorkloadIdentity == "") {
-		return internal.QueryResults{}, fmt.Errorf("SentinelAppSecret is empty and no Managed Identity set, skipping..")
+		return internal.QueryResults{}, fmt.Errorf("SentinelAppSecret is empty and no Managed Identity or Federated Workload Identity set, skipping..")
 	}
 
 	results, err := LArunQuery(m.Query, m.Credentials)

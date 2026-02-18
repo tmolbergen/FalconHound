@@ -42,7 +42,7 @@ var _MDESession MDESession
 
 func (m *MDEProcessor) ExecuteQuery() (internal.QueryResults, error) {
 	if m.Credentials.MDEAppSecret == "" && (m.Credentials.MDEManagedIdentity == "" || m.Credentials.MDEManagedIdentity == "false") && (m.Credentials.MDEFederatedWorkloadIdentity == "false" || m.Credentials.MDEFederatedWorkloadIdentity == "") {
-		return internal.QueryResults{}, fmt.Errorf("MDEAppSecret is empty and no Managed Identity Enabled, skipping..")
+		return internal.QueryResults{}, fmt.Errorf("MDEAppSecret is empty and no Managed Identity or Federated Workload Identity set, skipping..")
 	}
 
 	if !_MDESession.initialized {
